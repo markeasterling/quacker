@@ -23,10 +23,10 @@ require 'rails_helper'
 # removed from Rails core in Rails 5, but can be added back in via the
 # `rails-controller-testing` gem.
 
-# RSpec.describe PostsController, type: :controller do
+# RSpec.describe RelationshipsController, type: :controller do
 
 #   # This should return the minimal set of attributes required to create a valid
-#   # Post. As you add validations to Post, be sure to
+#   # Relationship. As you add validations to Relationship, be sure to
 #   # adjust the attributes here as well.
 #   let(:valid_attributes) {
 #     skip("Add a hash of attributes valid for your model")
@@ -38,12 +38,12 @@ require 'rails_helper'
 
 #   # This should return the minimal set of values that should be in the session
 #   # in order to pass any filters (e.g. authentication) defined in
-#   # PostsController. Be sure to keep this updated too.
+#   # RelationshipsController. Be sure to keep this updated too.
 #   let(:valid_session) { {} }
 
 #   describe "GET #index" do
 #     it "returns a success response" do
-#       post = Post.create! valid_attributes
+#       relationship = Relationship.create! valid_attributes
 #       get :index, params: {}, session: valid_session
 #       expect(response).to be_success
 #     end
@@ -51,33 +51,33 @@ require 'rails_helper'
 
 #   describe "GET #show" do
 #     it "returns a success response" do
-#       post = Post.create! valid_attributes
-#       get :show, params: {id: post.to_param}, session: valid_session
+#       relationship = Relationship.create! valid_attributes
+#       get :show, params: {id: relationship.to_param}, session: valid_session
 #       expect(response).to be_success
 #     end
 #   end
 
 #   describe "POST #create" do
 #     context "with valid params" do
-#       it "creates a new Post" do
+#       it "creates a new Relationship" do
 #         expect {
-#           post :create, params: {post: valid_attributes}, session: valid_session
-#         }.to change(Post, :count).by(1)
+#           post :create, params: {relationship: valid_attributes}, session: valid_session
+#         }.to change(Relationship, :count).by(1)
 #       end
 
-#       it "renders a JSON response with the new post" do
+#       it "renders a JSON response with the new relationship" do
 
-#         post :create, params: {post: valid_attributes}, session: valid_session
+#         post :create, params: {relationship: valid_attributes}, session: valid_session
 #         expect(response).to have_http_status(:created)
 #         expect(response.content_type).to eq('application/json')
-#         expect(response.location).to eq(post_url(Post.last))
+#         expect(response.location).to eq(relationship_url(Relationship.last))
 #       end
 #     end
 
 #     context "with invalid params" do
-#       it "renders a JSON response with errors for the new post" do
+#       it "renders a JSON response with errors for the new relationship" do
 
-#         post :create, params: {post: invalid_attributes}, session: valid_session
+#         post :create, params: {relationship: invalid_attributes}, session: valid_session
 #         expect(response).to have_http_status(:unprocessable_entity)
 #         expect(response.content_type).to eq('application/json')
 #       end
@@ -90,27 +90,27 @@ require 'rails_helper'
 #         skip("Add a hash of attributes valid for your model")
 #       }
 
-#       it "updates the requested post" do
-#         post = Post.create! valid_attributes
-#         put :update, params: {id: post.to_param, post: new_attributes}, session: valid_session
-#         post.reload
+#       it "updates the requested relationship" do
+#         relationship = Relationship.create! valid_attributes
+#         put :update, params: {id: relationship.to_param, relationship: new_attributes}, session: valid_session
+#         relationship.reload
 #         skip("Add assertions for updated state")
 #       end
 
-#       it "renders a JSON response with the post" do
-#         post = Post.create! valid_attributes
+#       it "renders a JSON response with the relationship" do
+#         relationship = Relationship.create! valid_attributes
 
-#         put :update, params: {id: post.to_param, post: valid_attributes}, session: valid_session
+#         put :update, params: {id: relationship.to_param, relationship: valid_attributes}, session: valid_session
 #         expect(response).to have_http_status(:ok)
 #         expect(response.content_type).to eq('application/json')
 #       end
 #     end
 
 #     context "with invalid params" do
-#       it "renders a JSON response with errors for the post" do
-#         post = Post.create! valid_attributes
+#       it "renders a JSON response with errors for the relationship" do
+#         relationship = Relationship.create! valid_attributes
 
-#         put :update, params: {id: post.to_param, post: invalid_attributes}, session: valid_session
+#         put :update, params: {id: relationship.to_param, relationship: invalid_attributes}, session: valid_session
 #         expect(response).to have_http_status(:unprocessable_entity)
 #         expect(response.content_type).to eq('application/json')
 #       end
@@ -118,11 +118,11 @@ require 'rails_helper'
 #   end
 
 #   describe "DELETE #destroy" do
-#     it "destroys the requested post" do
-#       post = Post.create! valid_attributes
+#     it "destroys the requested relationship" do
+#       relationship = Relationship.create! valid_attributes
 #       expect {
-#         delete :destroy, params: {id: post.to_param}, session: valid_session
-#       }.to change(Post, :count).by(-1)
+#         delete :destroy, params: {id: relationship.to_param}, session: valid_session
+#       }.to change(Relationship, :count).by(-1)
 #     end
 #   end
 
