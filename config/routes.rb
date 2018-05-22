@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     member do 
       get :posts
       get :relationships
+      get :post_feed
     end
   end
   resources :posts

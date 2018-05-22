@@ -46,6 +46,14 @@ class UsersController < ApplicationController
      render json: @user.posts
   end
 
+  # GET /users/1/post_feed -- for logged in user's feed
+  def post_feed
+    @user = User.find(params[:id])
+    @following = @user.following.ids
+    @posts = Post.where("user_id IN (?) or user_id = ?", @following, :id)
+    render json: @posts
+  end
+
   # GET /users/1/relationships
   def relationships
     print params
