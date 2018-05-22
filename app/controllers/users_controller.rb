@@ -39,6 +39,20 @@ class UsersController < ApplicationController
     @user.destroy
   end
 
+  # GET /users/1/posts  
+  def posts
+    print params
+     @user = User.find(params[:id])
+     render json: @user.posts
+  end
+
+  # GET /users/1/relationships
+  def relationships
+    print params
+     @user = User.find(params[:id])
+     render :json => {:following => @user.following, :followed_users => @user.followers }
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
