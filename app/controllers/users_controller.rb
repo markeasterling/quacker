@@ -50,7 +50,7 @@ class UsersController < ApplicationController
   def post_feed
     @user = User.find(params[:id])
     @following = @user.following.ids
-    @posts = Post.where("user_id IN (?) or user_id = ?", @following, :id)
+    @posts = Post.where("user_id = ? OR user_id IN (?)", :id, @following).order(created_at: :desc)
     render json: @posts
   end
 
