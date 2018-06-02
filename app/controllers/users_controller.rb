@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  # before_action :authenticate_user
   before_action :set_user, only: [:show, :update, :destroy]
   wrap_parameters :user, include: [:name, :email, :password, :password_confirmation]
 
@@ -52,6 +53,12 @@ class UsersController < ApplicationController
     @following = @user.following.ids
     @posts = Post.where("user_id = ? OR user_id IN (?)", :id, @following).order(created_at: :desc)
     render json: @posts
+  end
+
+  def feed_users
+    @user = User.find(params[:id])
+    @following = @user.following
+    render json: @following
   end
 
   # GET /users/1/relationships
