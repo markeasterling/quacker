@@ -1,12 +1,11 @@
 class UsersController < ApplicationController
-  # before_action :authenticate_user
+  before_action :authenticate_user
   before_action :set_user, only: [:show, :update, :destroy]
   wrap_parameters :user, include: [:name, :email, :password, :password_confirmation]
 
   # GET /users
   def index
     @users = User.all
-
     render json: @users
   end
 
@@ -42,9 +41,13 @@ class UsersController < ApplicationController
 
   # GET /users/1/posts  
   def posts
-    print params
      @user = User.find(params[:id])
      render json: @user.posts
+  end
+
+  # GET /user/current -- current authenticated user
+  def current
+    render json: current_user
   end
 
   # GET /users/1/post_feed -- for logged in user's feed
@@ -63,7 +66,6 @@ class UsersController < ApplicationController
 
   # GET /users/1/relationships
   def relationships
-    print params
      @user = User.find(params[:id])
      render :json => {:following => @user.following, :followed_users => @user.followers }
   end

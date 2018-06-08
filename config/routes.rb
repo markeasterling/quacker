@@ -7,11 +7,13 @@ Rails.application.routes.draw do
       get :post_feed
       get :feed_users
     end
+    collection do
+      get :current
+    end
   end
+  
   resources :posts
   resources :relationships
-
-  post 'user_token' => 'user_token#create'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

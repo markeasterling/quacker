@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import { loginFetchToken } from './reducers/loginReducer';
+import LoginForm from './components/LoginForm';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        heyyy
+        <LoginForm />
       </div>
     );
   }
