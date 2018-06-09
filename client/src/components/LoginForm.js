@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { loginFetchToken } from '../reducers/loginReducer'
+import { loginLoadCurrentUser } from '../reducers/loginReducer'
 
 class LoginForm extends Component {
   constructor(props) {
@@ -15,7 +15,6 @@ class LoginForm extends Component {
   }
 
   handleChange(event) {
-    console.log(event.target)
     this.setState({
      [event.target.name]: event.target.value
     })
@@ -23,10 +22,9 @@ class LoginForm extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log(this.props)
     const email = this.state.email;
     const password = this.state.password;
-    this.props.loginFetchToken(email, password)
+    this.props.loginLoadCurrentUser(email, password)
   }
 
   render(props) {
@@ -59,7 +57,7 @@ class LoginForm extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  loginFetchToken: (email, password) => dispatch(loginFetchToken(email, password))
+  loginLoadCurrentUser: (email, password) => dispatch(loginLoadCurrentUser(email, password))
 })
 
 export default connect(

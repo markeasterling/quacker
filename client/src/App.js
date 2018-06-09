@@ -7,6 +7,7 @@ class App extends Component {
     return (
       <div className="App">
         <LoginForm />
+        <button onClick={() => (localStorage.removeItem('token'))}>delete storage</button>
       </div>
     );
   }

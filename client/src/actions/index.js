@@ -29,7 +29,7 @@ export function loginUserHasErrored(boolean) {
 export function loginUserSuccess(token) {
   return {
     type: LOGIN_SUCCESS,
-    token
+    token: token
   }
 }
 
@@ -50,7 +50,7 @@ export function getCurrentUserError(boolean) {
 export function getCurrentUserSuccess(user) {
   return {
     type: GET_CURRENT_USER_SUCCESS,
-    user
+    user: user
   }
 }
 
@@ -68,10 +68,10 @@ export function getCurrentUserFeedError(boolean) {
   }
 }
 
-export function getUserFeedSuccess(feed) {
+export function getCurrentUserFeedSuccess(feed) {
   return {
-    type: GET_CURRENT_USER_SUCCESS,
-    feedIsLoading: feed
+    type: GET_CURRENT_USER_FEED_SUCCESS,
+    feed: feed
   }
 }
 

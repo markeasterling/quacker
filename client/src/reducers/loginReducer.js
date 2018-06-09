@@ -1,4 +1,23 @@
-import { LOGIN_IS_LOADING, LOGIN_HAS_ERRORED, LOGIN_SUCCESS, loginUserIsLoading, loginUserHasErrored, loginUserSuccess } from '../actions';
+import { 
+  LOGIN_IS_LOADING, 
+  LOGIN_HAS_ERRORED, 
+  LOGIN_SUCCESS,
+  GET_CURRENT_USER_LOADING,
+  GET_CURRENT_USER_ERROR,
+  GET_CURRENT_USER_SUCCESS,
+  GET_CURRENT_USER_FEED_LOADING,
+  GET_CURRENT_USER_FEED_ERROR,
+  GET_CURRENT_USER_FEED_SUCCESS,
+  loginUserIsLoading,
+  loginUserHasErrored,
+  loginUserSuccess,
+  getCurrentUserLoading,
+  getCurrentUserError,
+  getCurrentUserSuccess,
+  getCurrentUserFeedLoading,
+  getCurrentUserFeedError,
+  getCurrentUserFeedSuccess
+} from '../actions';
 import { push } from 'react-router-redux';
 import { history } from '../store/store';
 
@@ -22,34 +41,134 @@ export function loginUserHasErroredReducer(state = false, action) {
   }
 }
 
-export function loginUserSuccessReducer(state = [], action) {
+export function loginUserSuccessReducer(state = {}, action) {
   switch (action.type) {
     case LOGIN_SUCCESS:
       return action.token;
+    default:
+      return state
   }
 }
 
-export function loginFetchToken(email, password) {
-  return (dispatch) => {
-  console.log(email)
-    console.log(`{"auth":{"email": "${email}", "password": "${password}"}}`)
-    dispatch(loginUserIsLoading(true));
+export function getCurrentUserLoadingReducer(state = false, action) {
+  switch (action.type) {
+    case GET_CURRENT_USER_LOADING:
+      return action.currentUserIsLoading;
 
-    fetch('http://localhost:3001/user_token', { 
-        method: "POST",
+    default:
+      return state;
+  }
+}
+
+export function getCurrentUserHasErroredReducer(state = false, action) {
+  switch (action.type) {
+    case GET_CURRENT_USER_ERROR:
+      return action.currentUserHasErrored;
+
+    default:
+      return state
+  }
+}
+
+export function getCurrentUserSuccessReducer(state = {}, action) {
+  switch (action.type) {
+    case GET_CURRENT_USER_SUCCESS:
+      return action.user;
+    default:
+      return state
+  }
+}
+
+export function getCurrentUserFeedLoadingReducer(state = false, action) {
+  switch (action.type) {
+    case GET_CURRENT_USER_FEED_LOADING:
+      return action.feedIsLoading
+    default:
+      return state
+  }
+}
+
+export function getCurrentUserFeedErrorReducer(state = false, action) {
+  switch (action.type) {
+    case GET_CURRENT_USER_FEED_ERROR:
+      return action.feedHasErrored
+    default:
+      return state
+  }
+}
+
+export function getCurrentUserFeedSuccessReducer(state = [], action) {
+  switch (action.type) {
+    case GET_CURRENT_USER_FEED_SUCCESS:
+      return action.feed
+    default:
+      return state
+  }
+}
+
+export function loginLoadCurrentUser(email, password) {
+  return (dispatch, getState) => {
+    return dispatch(getToken(email, password)).then(() => {
+      return dispatch(getCurrentUser()).then(() => {
+        return dispatch(getCurrentUserPosts())
+      })
+    })
+  }
+}
+
+export function getToken(email, password) {
+  return (dispatch) => {
+    dispatch(loginUserIsLoading(true));
+    return fetch('http://localhost:3001/user_token', { 
+        method: 'POST',
         body: `{"auth":{"email": "${email}", "password": "${password}"}}`,
         headers: {"Content-Type": "application/json"} 
     })
       .then((response) => {
-        if (!response.ok) {
-          throw Error(response.statusText)
-        }
-
         dispatch(loginUserIsLoading(false))
         return response
       })
       .then((response) => response.json())
-      .then((token) => console.log(token))
+      .then((response) => {
+        localStorage.setItem('token', response.jwt)
+        dispatch(loginUserSuccess(response))
+      })
+      .catch(() => dispatch(loginUserHasErrored(true)))
+  }
+}
+
+export function getCurrentUser() {
+  return (dispatch) => {
+    dispatch(getCurrentUserLoading(true))
+    return fetch('http://localhost:3001/users/current', {
+      method: 'GET',
+      headers: {"Content-Type": "application/json", "Authorization": `Bearer ${localStorage.getItem('token')}`}
+    })
+      .then((response) => {
+        dispatch(getCurrentUserLoading(false))
+        return response
+      })
+      .then((response) => response.json())
+      .then((response) => dispatch(getCurrentUserSuccess(response)))
+      .catch(() => dispatch(getCurrentUserError(true)))
+  }
+}
+
+export function getCurrentUserPosts() {
+  return (dispatch, getState) => {
+    dispatch(getCurrentUserFeedLoading(true))
+    const {currentUser} = getState();
+    return fetch(`http://localhost:3001/users/${currentUser.id}/post_feed`, {
+      method: 'GET',
+      headers: {"Content-Type": "application/json", "Authorization": `Bearer ${localStorage.getItem('token')}`}
+    })
+      .then((response) => {
+        dispatch(getCurrentUserFeedLoading(false))
+        return response
+      })
+      .then((response) => response.json())
+      .then((response) => dispatch(getCurrentUserFeedSuccess(response)))
+      .catch(() => dispatch(getCurrentUserFeedError(true)))
 
   }
 }
