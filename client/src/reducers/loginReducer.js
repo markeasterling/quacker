@@ -110,7 +110,9 @@ export function loginLoadCurrentUser(email, password) {
   return (dispatch, getState) => {
     return dispatch(getToken(email, password)).then(() => {
       return dispatch(getCurrentUser()).then(() => {
-        return dispatch(getCurrentUserPosts())
+        return dispatch(getCurrentUserPosts()).then(() => {
+          // return history.push('/feed')
+        })
       })
     })
   }

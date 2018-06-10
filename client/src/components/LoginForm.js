@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
-import { loginLoadCurrentUser } from '../reducers/loginReducer'
+import { connect } from 'react-redux';
+import { history } from '../store/store';
+import { push } from 'react-router-redux';
+import { loginLoadCurrentUser } from '../reducers/loginReducer';
 
 class LoginForm extends Component {
   constructor(props) {
@@ -24,6 +26,7 @@ class LoginForm extends Component {
     event.preventDefault();
     const email = this.state.email;
     const password = this.state.password;
+    history.push('/feed')
     this.props.loginLoadCurrentUser(email, password)
   }
 
