@@ -18,6 +18,8 @@ import {
   getCurrentUserFeedError,
   getCurrentUserFeedSuccess
 } from '../actions';
+
+import { getRelationships } from './relationships'
 import { push } from 'react-router-redux';
 import { history } from '../store/store';
 
@@ -111,7 +113,8 @@ export function loginLoadCurrentUser(email, password) {
     return dispatch(getToken(email, password)).then(() => {
       return dispatch(getCurrentUser()).then(() => {
         return dispatch(getCurrentUserPosts()).then(() => {
-          // return history.push('/feed')
+          const {currentUser} = getState();
+          return dispatch(getRelationships(currentUser.id))
         })
       })
     })

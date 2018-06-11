@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
-// import { loginFetchToken } from './reducers/loginReducer';
 import { connect } from 'react-redux';
 import LoginForm from './components/LoginForm';
 import Feed from './containers/Feed';

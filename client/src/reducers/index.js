@@ -10,19 +10,27 @@ import {
   getCurrentUserFeedLoadingReducer,
   getCurrentUserFeedErrorReducer,
   getCurrentUserFeedSuccessReducer
-
-
 } from './loginReducer'
+
+import { 
+  getRelationshipsLoadingReducer,
+  getRelationshipsErrorReducer,
+  getRelationshipsSuccessReducer 
+} from './relationships'
 
 export default combineReducers({
   routing: routerReducer,
   userAuthToken: loginUserSuccessReducer,
   currentUser: getCurrentUserSuccessReducer,
   currentUserFeed: getCurrentUserFeedSuccessReducer,
+  relationships: getRelationshipsSuccessReducer,
   loginUserIsLoading: loginUserIsLoadingReducer,
   loginUserHasErrored: loginUserHasErroredReducer,
   currentUserIsLoading: getCurrentUserLoadingReducer,
   currentUserHasErrored: getCurrentUserHasErroredReducer,
   currentUserFeedIsLoading: getCurrentUserFeedLoadingReducer,
-  currentUserFeedHasErrored: getCurrentUserFeedErrorReducer
+  currentUserFeedHasErrored: getCurrentUserFeedErrorReducer,
+  relationshipsAreLoading: getRelationshipsLoadingReducer,
+  relationshipsHasErrored: getRelationshipsErrorReducer,
+
 })

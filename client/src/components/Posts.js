@@ -6,16 +6,13 @@ const Posts = props => {
 
   return(
     <div>
-      <button onClick={() => console.log(posts)}>what posts?</button>
-      {
-        (posts.length !== 0) && 
+      {(posts.length !== 0) && 
           posts.map((postData) => (
             <Post
               key={postData.id} 
               postData={postData} 
             />
-          ))
-      }
+      ))}
     </div>
   )
 }

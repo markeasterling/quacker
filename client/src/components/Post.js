@@ -2,7 +2,8 @@ import React from 'react';
 
 const Post = ({postData}) => (
   <div key={postData.id}>
-    {postData.content}
+    <div>{postData.created_at}</div>
+    <div>{postData.content}</div>
   </div>
 )
 
