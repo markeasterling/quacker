@@ -1,24 +1,12 @@
-# README
+# Quacker
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### on initial clone
+in base directory: `bundle install`, `rails db:migrate`, `rails db:seed`
+cd client: `yarn install`
 
-Things you may want to cover:
+### to run
+in base directory: `rails -p 3001` (the front end is kind of hardcoded for 3001)
+cd client: `yarn start`
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### to poke around
+users are seeded. one can log in with the email `example1@ducks.com` and the password `password`
