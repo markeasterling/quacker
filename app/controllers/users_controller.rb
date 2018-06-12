@@ -39,7 +39,7 @@ class UsersController < ApplicationController
     @user.destroy
   end
 
-  # GET /users/1/posts  
+  # GET /users/1/posts
   def posts
      @user = User.find(params[:id])
      render json: @user.posts

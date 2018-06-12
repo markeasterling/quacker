@@ -6,13 +6,14 @@ const Posts = props => {
 
   return(
     <div>
-      {(posts.length !== 0) && 
+      {posts && 
           posts.map((postData) => (
             <Post
               key={postData.id} 
               postData={postData} 
             />
-      ))}
+          ))
+      }
     </div>
   )
 }

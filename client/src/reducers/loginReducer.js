@@ -114,7 +114,9 @@ export function loginLoadCurrentUser(email, password) {
       return dispatch(getCurrentUser()).then(() => {
         return dispatch(getCurrentUserPosts()).then(() => {
           const {currentUser} = getState();
-          return dispatch(getRelationships(currentUser.id))
+          return dispatch(getRelationships(currentUser.id)).then(() => {
+            history.push('/feed')
+          })
         })
       })
     })

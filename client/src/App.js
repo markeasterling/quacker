@@ -15,7 +15,7 @@ class App extends Component {
         <button onClick={() => (console.log(this.props))}>see st8</button>
 
         <main>
-          <Route exact path="/" component={(localStorage.getItem('token') == null) ? LoginForm : Feed} />
+          <Route exact path="/" component={LoginForm} />
           <Route exact path="/feed" component={Feed} />
         </main>
       </div>

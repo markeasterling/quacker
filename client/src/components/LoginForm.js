@@ -26,8 +26,8 @@ class LoginForm extends Component {
     event.preventDefault();
     const email = this.state.email;
     const password = this.state.password;
-    history.push('/feed')
     this.props.loginLoadCurrentUser(email, password)
+    // history.push('/feed')
   }
 
   render(props) {
