@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux'
+import { getUserPosts } from '../reducers/userReducer'
 
 const Relationships = props => {
   const { users } = props;
@@ -10,7 +12,7 @@ const Relationships = props => {
         users.map((user) => (
           <li 
             key={user.id}
-            onClick={() => console.log(user.id)}
+            onClick={() => props.getUserPosts(user.id)}
           >
             {user.name}
           </li>
@@ -20,4 +22,8 @@ const Relationships = props => {
   )
 }
 
-export default Relationships
+const mapDispatchToProps = dispatch => ({
+getUserPosts: (userId) => dispatch(getUserPosts(userId))
+})
+
+export default connect(null, mapDispatchToProps)(Relationships)

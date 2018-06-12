@@ -13,6 +13,9 @@ export const GET_USER_POSTS_SUCCESS = 'GET_USER_POSTS_SUCCESS';
 export const GET_RELATIONSHIPS_LOADING = 'GET_RELATIONSHIPS_LOADING';
 export const GET_RELATIONSHIPS_ERROR = 'GET_RELATIONSHIPS_ERROR';
 export const GET_RELATIONSHIPS_SUCCESS = 'GET_RELATIONSHIPS_SUCCESS';
+export const GET_CURRENT_USER_RELATIONSHIPS_LOADING = 'GET_CURRENT_USER_RELATIONSHIPS_LOADING';
+export const GET_CURRENT_USER_RELATIONSHIPS_ERROR = 'GET_CURRENT_USER_RELATIONSHIPS_ERROR';
+export const GET_CURRENT_USER_RELATIONSHIPS_SUCCESS = 'GET_CURRENT_USER_RELATIONSHIPS_SUCCESS';
 
 
 
@@ -82,14 +85,14 @@ export function getCurrentUserFeedSuccess(feed) {
 export function getUserPostsLoading(boolean) {
   return {
     type: GET_USER_POSTS_LOADING,
-    postsAreLoading: boolean
+    postsLoading: boolean
   }
 }
 
 export function getUserPostsError(boolean) {
   return {
     type: GET_USER_POSTS_ERROR,
-    postsHaveErrored: boolean
+    postsErrored: boolean
   }
 }
 
@@ -113,6 +116,21 @@ export const getRelationshipsError = (boolean) => ({
 export const getRelationshipsSuccess = (relationships) => ({
   type: GET_RELATIONSHIPS_SUCCESS,
   relationships
+})
+
+export const getCurrentUserRelationshipsLoading = (boolean) => ({
+  type: GET_CURRENT_USER_RELATIONSHIPS_LOADING,
+  currentUserRelationshipsLoading: boolean
+})
+
+export const getCurrentUserRelationshipsError = (boolean) => ({
+  type: GET_CURRENT_USER_RELATIONSHIPS_ERROR,
+  currentUserRelationshipsErrored: boolean
+})
+
+export const getCurrentUserRelationshipsSuccess = (currentUserRelationships) => ({
+  type: GET_CURRENT_USER_RELATIONSHIPS_SUCCESS,
+  currentUserRelationships
 })
 
 

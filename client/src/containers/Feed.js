@@ -10,9 +10,9 @@ const Feed = (props) => (
     <h2>your post feed</h2>
     <Posts posts={props.currentUserFeed} />
     <h2>followers</h2>
-    <Relationships users={props.relationships.followed_users}/>
+    <Relationships users={props.currentUserRelationships.followed_users}/>
     <h2>following</h2>
-    <Relationships users={props.relationships.following}/>
+    <Relationships users={props.currentUserRelationships.following}/>
   </div>
 )
 

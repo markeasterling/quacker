@@ -3,6 +3,7 @@ import { Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import LoginForm from './components/LoginForm';
 import Feed from './containers/Feed';
+import User from './containers/User';
 
 class App extends Component {
   render() {
@@ -17,6 +18,7 @@ class App extends Component {
         <main>
           <Route exact path="/" component={LoginForm} />
           <Route exact path="/feed" component={Feed} />
+          <Route exact path="/userpage" component={User} />
         </main>
       </div>
     );
